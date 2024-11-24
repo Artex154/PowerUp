@@ -1,0 +1,4 @@
+name: PowerUp
+version: '1.0-SNAPSHOT'
+main: be.artex.powerUp.Main
+api-version: '1.21'
