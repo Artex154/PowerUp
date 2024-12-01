@@ -2,3 +2,8 @@ name: PowerUp
 version: '1.0-SNAPSHOT'
 main: be.artex.powerUp.Main
 api-version: '1.21'
+commands:
+  ce:
+    usage: "§6/ce <enchant-name> <level>"
+    description: Add custom enchants to an item
+    permission: powerup.debug.enchant
