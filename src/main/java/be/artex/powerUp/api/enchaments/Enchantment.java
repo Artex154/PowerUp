@@ -1,6 +1,7 @@
 package be.artex.powerUp.api.enchaments;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -15,6 +16,7 @@ public abstract class Enchantment {
     public abstract String getName();
     public abstract int getMaxLevel();
     public abstract ChatColor getNameColor();
+    public abstract EnchantmentType getType();
 
     public static void addEnchant(ItemStack stack, Enchantment enchantment, int level) {
         ItemMeta meta = stack.getItemMeta();
@@ -28,6 +30,28 @@ public abstract class Enchantment {
         meta.setLore(lore);
         stack.setItemMeta(meta);
     }
+
+    public static EnchantmentType[] getEnchantmentTypeFromStack(ItemStack stack) {
+        Material material = stack.getType();
+        EnchantmentType[] enchantmentTypes = {};
+
+        if (material.name().endsWith("_SWORD")) {
+            return new EnchantmentType[]{EnchantmentType.ALL, EnchantmentType.SWAXE, EnchantmentType.SWORD};
+        } else if (material.name().endsWith("_AXE")) {
+            return new EnchantmentType[]{EnchantmentType.ALL, EnchantmentType.SWAXE};
+        } else if (material.name().endsWith("_HELMET")) {
+            return new EnchantmentType[]{EnchantmentType.ALL, EnchantmentType.ARMOR, EnchantmentType.HELMET};
+        } else if (material.name().endsWith("_CHESTPLATE")) {
+            return new EnchantmentType[]{EnchantmentType.ALL, EnchantmentType.ARMOR, EnchantmentType.CHESTPLATE};
+        } else if (material.name().endsWith("_LEGGINGS")) {
+            return new EnchantmentType[]{EnchantmentType.ALL, EnchantmentType.ARMOR, EnchantmentType.LEGGINGS};
+        } else if (material.name().endsWith("_BOOTS")) {
+            return new EnchantmentType[]{EnchantmentType.ALL, EnchantmentType.ARMOR, EnchantmentType.BOOTS};
+        }
+
+        return null;
+    }
+
 
     public static Map<Enchantment, Integer> getEnchantmentsWithLevels(ItemStack stack) {
         Map<Enchantment, Integer> enchantmentsWithLevels = new HashMap<>();
