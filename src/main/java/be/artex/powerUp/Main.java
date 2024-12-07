@@ -3,7 +3,9 @@ package be.artex.powerUp;
 import be.artex.powerUp.api.enchaments.Enchantment;
 import be.artex.powerUp.command.CustomEnchant;
 import be.artex.powerUp.enchant.Frozen;
+import be.artex.powerUp.enchant.Ninja;
 import be.artex.powerUp.listener.player.DamageEntity;
+import be.artex.powerUp.listener.player.Move;
 import be.artex.powerUp.listener.player.Server;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -17,11 +19,13 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         // initializePlatform(Material.BARRIER);
         // this.getServer().getPluginManager().registerEvents(new Server(), this);
-        this.getServer().getPluginManager().registerEvents(new DamageEntity(), this);
+        getServer().getPluginManager().registerEvents(new DamageEntity(), this);
+        getServer().getPluginManager().registerEvents(new Move(), this);
 
         getCommand("ce").setExecutor(new CustomEnchant());
 
         Enchantment.enchants.add(new Frozen());
+        Enchantment.enchants.add(new Ninja());
     }
 
     private void initializePlatform(Material material) {
